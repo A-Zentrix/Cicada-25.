@@ -55,8 +55,10 @@ def chat(req: ChatRequest) -> ChatResponse:
 # Compute absolute path to ../frontend relative to this file
 _BACKEND_DIR = os.path.dirname(__file__)
 _FRONTEND_DIR = os.path.abspath(os.path.join(_BACKEND_DIR, "..", "frontend"))
+_FRONTEND_DIST = os.path.join(_FRONTEND_DIR, 'dist')
 
-# Serve the basic frontend from ../frontend
-app.mount("/", StaticFiles(directory=_FRONTEND_DIR, html=True), name="static")
+# Serve built app if present, otherwise serve source for dev
+_STATIC_DIR = _FRONTEND_DIST if os.path.exists(_FRONTEND_DIST) else _FRONTEND_DIR
+app.mount("/", StaticFiles(directory=_STATIC_DIR, html=True), name="static")
 
 

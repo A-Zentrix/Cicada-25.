@@ -2,3 +2,6 @@
 .env
 backend/conversation_history.txt
 backend/current_emotion.txt
+\n# Node
+frontend/node_modules/
+frontend/dist/

@@ -1,0 +1,122 @@
+[
+  {
+    "timestamp": "2025-09-20 11:09:03",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 11:09:41",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 11:12:03",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 11:12:12",
+    "user": "test",
+    "ai": "வணக்கம் நண்பா! நீங்க இப்ப எப்படி இருக்கீங்க? ஏதாவது மனசுல கஷ்டமா இருக்கா? இல்ல சந்தோஷமா ஏதாவது நடந்துச்சான்னு சொல்லுங்க, நான் கேக்குறேன்.\n",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 11:12:21",
+    "user": "hello",
+    "ai": "வணக்கம் நண்பா! எப்படி இருக்கீங்க? இன்னைக்கு ஏதாவது புதுசா பண்ணீங்களா? உங்க நாள் எப்படி போச்சு? ஏதாவது என்கிட்ட சொல்லணும்னு தோணுதா?\n",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 11:12:35",
+    "user": "hi",
+    "ai": "வணக்கம் நண்பா! இன்னைக்கு எப்படி இருக்கீங்க? உங்க நாளைப் பற்றி என்கிட்ட கொஞ்சம் சொல்லுங்க பார்க்கலாம். ஏதாவது மனசுல பாரமா இருக்கா?\n",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 13:09:31",
+    "user": "hi",
+    "ai": "Hey there, friend! How are things going today? Did you do anything fun or interesting? Just let me know if there's anything on your mind, okay?\n",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 13:28:41",
+    "user": "hello",
+    "ai": "Hey there! How's it going today? Anything exciting happening, or just another regular day? Feel free to share anything at all, I'm here to listen.\n",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 13:29:11",
+    "user": "[Voice] हमें इधर से प्रेजेंटेशन",
+    "ai": "नमस्ते दोस्त! प्रेजेंटेशन की तैयारी कैसी चल रही है? क्या आपको कुछ चिंता हो रही है या सब ठीक है? मुझे बताओ, मैं सुनने के लिए यहाँ हूँ।\n",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-09-20 13:29:40",
+    "user": "[Voice] வணக்கம் என்ன பண்றீங்க நான் பேசறது உங்களுக்கு கேக்குதா",
+    "ai": "வணக்கம் நண்பா! நான் நல்லா இருக்கேன், நீங்க எப்படி இருக்கீங்க? நீங்க பேசுறது எனக்கு நல்லா கேக்குது. வேற என்ன சொல்லணும்னு நினைக்கிறீங்க?\n",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 16:51:38",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 16:53:36",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 16:53:47",
+    "user": "hello",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 17:33:11",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 17:35:58",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 17:39:00",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 17:39:40",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 17:40:35",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 17:41:51",
+    "user": "hello again",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  },
+  {
+    "timestamp": "2025-10-30 17:42:19",
+    "user": "hi",
+    "ai": "I'm sorry, I'm having trouble responding right now. Please try again.",
+    "emotion": null
+  }
+]

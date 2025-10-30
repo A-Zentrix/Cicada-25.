@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Analysis Reports</title>
+    <link rel="icon" type="image/svg+xml" href="/ui/vite.svg" />
+    <style>
+      body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; background: #f5f7f9; color: #2a3240; }
+      .wrap { max-width: 960px; margin: 24px auto; padding: 16px; }
+      .top { display:flex; align-items:center; justify-content:space-between; margin-bottom: 16px; }
+      .btn { padding: 8px 14px; border-radius: 10px; border: 1px solid rgba(42,50,64,0.12); background:#fff; font-weight:800; cursor:pointer; }
+      .list { display:flex; flex-direction:column; gap:12px; }
+      .item { display:grid; grid-template-columns: 1fr auto auto; gap:12px; align-items:center; background:#fff; border:1px solid rgba(42,50,64,0.08); border-radius:12px; padding:12px; }
+      .meta { min-width:0; }
+      .name { font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .sub { font-size:12px; color:#6b7280; }
+      .empty { padding: 20px; text-align:center; border:1px dashed rgba(42,50,64,0.2); border-radius:12px; background:#fff; }
+      .grid { display:grid; grid-template-columns: 340px 1fr; gap: 16px; align-items:start; }
+      .panel { background:#fff; border:1px solid rgba(42,50,64,0.08); border-radius:12px; padding:12px; }
+      .heading { margin:0 0 8px; font-size:18px; font-weight:800; }
+      .section { background:#fff; border:1px solid rgba(42,50,64,0.08); border-radius:12px; padding:12px; margin-bottom:12px; }
+      .section h4 { margin:0 0 8px; font-size:14px; color:#475569; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New"; font-size: 13px; white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <h2 style="margin:0">Analysis Reports</h2>
+        <div>
+          <button class="btn" id="gen">Generate Report</button>
+          <a class="btn" href="/ui/">Back</a>
+        </div>
+      </div>
+      <div id="status" class="sub" style="margin-bottom:10px"></div>
+      <div class="grid">
+        <div>
+          <div id="list" class="list"></div>
+        </div>
+        <div id="details" class="panel">
+          <h3 class="heading">Report Details</h3>
+          <div id="detailsBody" class="sub">Select a report to view its analysis.</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      async function fetchJSON(path, opts) { const r = await fetch(path, opts); return r.json(); }
+      function cleanSummary(text){ if(!text) return '—'; let s = String(text); s = s.replace(/```\s*python\s*/gi,'').replace(/```/g,'').trim(); if (/^python\s*/i.test(s)) s = s.replace(/^python\s*/i,''); return s; }
+      async function load() {
+        const container = document.getElementById('list');
+        container.innerHTML = '';
+        try {
+          const data = await fetchJSON('/reports/list');
+          if (!data.success || !data.reports || data.reports.length === 0) {
+            container.innerHTML = '<div class="empty">No reports yet. Click "Generate Report" to create one.</div>';
+            return;
+          }
+          for (const r of data.reports) {
+            const row = document.createElement('div'); row.className = 'item';
+            row.innerHTML = `
+              <div class="meta">
+                <div class="name" title="${r.filename}">${r.filename}</div>
+                <div class="sub">Created: ${r.created} | Size: ${(r.size/1024).toFixed(1)} KB</div>
+              </div>
+              <a class="btn" href="/reports/download/${r.filename}">Download</a>
+              <button class="btn view">View</button>
+            `;
+            row.querySelector('.view').addEventListener('click', async () => {
+              try {
+                const res = await fetch(`/reports/download/${r.filename}`);
+                const json = await res.json();
+                const a = json.analysis || json;
+                const body = document.getElementById('detailsBody');
+                body.innerHTML = `
+                  <div class="section">
+                    <h4>Summary</h4>
+                    <div>${cleanSummary(a.analysied_report || a.analysed_report || a.summary)}</div>
+                  </div>
+                  <div class="section"><h4>Root Cause</h4><div>${a.root_case || '—'}</div></div>
+                  <div class="section"><h4>Mental Health Assessment</h4><div>${a.mental_illness || '—'}</div></div>
+                  <div class="section"><h4>Identified Problems</h4><div>${a.problem || '—'}</div></div>
+                  <div class="section"><h4>Recommendations</h4><div>${a.recommendation || '—'}</div></div>
+                  <div class="section"><h4>Raw JSON</h4><div class="mono">${escapeHtml(JSON.stringify(a, null, 2))}</div></div>
+                `;
+              } catch (e) { alert('Failed to open report'); }
+            });
+            container.appendChild(row);
+          }
+        } catch (e) {
+          container.innerHTML = '<div class="empty">Failed to load reports.</div>';
+        }
+      }
+      function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+      document.getElementById('gen').addEventListener('click', async () => {
+        const status = document.getElementById('status');
+        status.textContent = 'Generating...';
+        try {
+          const res = await fetchJSON('/generate_report', { method: 'POST' });
+          status.textContent = res.success ? 'Report generated.' : (res.message || 'Failed');
+          await load();
+        } catch (e) { status.textContent = 'Failed to generate.'; }
+      });
+      load();
+    </script>
+  </body>
+  </html>
+

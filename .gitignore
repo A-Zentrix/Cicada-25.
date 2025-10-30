@@ -1,0 +1,4 @@
+
+.env
+backend/conversation_history.txt
+backend/current_emotion.txt

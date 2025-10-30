@@ -52,7 +52,7 @@ def chat(req: ChatRequest) -> ChatResponse:
         raise HTTPException(status_code=500, detail=str(e))
 
 
-// Compute absolute path to ../frontend relative to this file
+# Compute absolute path to ../frontend relative to this file
 _BACKEND_DIR = os.path.dirname(__file__)
 _FRONTEND_DIR = os.path.abspath(os.path.join(_BACKEND_DIR, "..", "frontend"))
 

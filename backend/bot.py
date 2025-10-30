@@ -12,6 +12,7 @@ import os
 from typing import Optional, Dict, Final
 from google import genai
 from google.genai import types
+from dotenv import load_dotenv, find_dotenv
 
 
 # --- Configuration & Globals ---
@@ -35,6 +36,9 @@ def load_google_ai() -> None:
     global client
     if client is not None:
         return
+
+    # Load .env for local/dev if present
+    load_dotenv(find_dotenv(), override=False)
 
     api_key = os.environ.get(_GOOGLE_API_KEY_ENV)
     if not api_key:
@@ -127,17 +131,13 @@ def bot(prompt: str, language: str = "en-US") -> str:
 
     try:
         assert client is not None
+        full_prompt = (
+            f"{system_preamble}{language_context}{emotion_context}{memory_context}"
+            f"User input: {prompt}"
+        )
         response = client.models.generate_content(
             model=_MODEL_NAME,
-            contents=[
-                types.Content(
-                    role="user",
-                    parts=[types.Part.from_text(
-                        f"{system_preamble}{language_context}{emotion_context}{memory_context}"
-                        f"User input: {prompt}"
-                    )]
-                )
-            ],
+            contents=full_prompt,
         )
 
         text = getattr(response, "text", None)

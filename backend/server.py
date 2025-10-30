@@ -11,6 +11,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
+from dotenv import load_dotenv, find_dotenv
+import os
 
 from .bot import bot
 
@@ -23,6 +25,9 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     reply: str
 
+
+# Load .env early so GOOGLE_API_KEY is available
+load_dotenv(find_dotenv(), override=False)
 
 app = FastAPI(title="Cicada-25 Chatbot", version="0.1.0")
 
@@ -47,7 +52,11 @@ def chat(req: ChatRequest) -> ChatResponse:
         raise HTTPException(status_code=500, detail=str(e))
 
 
+// Compute absolute path to ../frontend relative to this file
+_BACKEND_DIR = os.path.dirname(__file__)
+_FRONTEND_DIR = os.path.abspath(os.path.join(_BACKEND_DIR, "..", "frontend"))
+
 # Serve the basic frontend from ../frontend
-app.mount("/", StaticFiles(directory=str(__file__).rsplit("/", 2)[0] + "/../frontend", html=True), name="static")
+app.mount("/", StaticFiles(directory=_FRONTEND_DIR, html=True), name="static")
 
 
